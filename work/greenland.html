@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Ellie Madsen</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="../index.css">
+        <link rel="shortcut icon" href="../img/tab-img.png"/>
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../home.html">
+                    <h3>ellie madsen</h3>
+                </a>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a href="../work.html">work</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../about.html">about</a>
+                </li>
+            </ul>
+
+        </nav>
+          
+        <!-- Content -->
+
+        <ul class="about-me">
+            <li class="about-me"><h1>producing greenland ice sheet river <br> networks from satellite imagery</h1></li>
+            <li class="about-me">deep learning</li>
+            <li class="about-me">fall 2021</li>
+            <li class="about-me">collaboration with nicholas petrocelli and sarah esenther</li>
+            <li class="about-me"><a href="https://github.com/nickpetrocelli/CSCI1470FinalProj">github repository</a></li>
+            <li class="about-me"><a href="https://docs.google.com/document/d/1nQqXou6KzhHXBdgSCZcMwDTUs8zJ8K6Ks9FML6nLhtc">paper</a></li>
+        </ul>
+
+        <div class="d-flex flex-column p-2 align-items-center">
+            <img src="../img/greenland-2.jpeg" alt="Image of architectural projections" width="900" class="pad">
+        </div>
+
+
+        <div class="d-flex flex-column p-2 align-items-center">
+            <p class="about-me pad" style="width: 900;">
+                Complex stream networks have been observed in detail on the Southwest Greenland Ice Sheet. These channels control drainage efficiency and timing, which has important effects on the rates of local surface melt, ice sliding velocity, and sea level rise. However, because the channels are only 1-20 m wide and vary greatly over space and time, they require repeated high resolution satellite imagery to map. Multiple semi-automated methods have been proposed to detect the streams from satellite imagery, but these methods have not used deep learning techniques and heavily rely on manual labor.
+                To advance this research, for our final project in 
+                <a href="https://brown-deep-learning.github.io/dl-website-2021/index.html">CSCI 1470: Deep Learning</a>
+                we sought to use deep learning to digitize these networks by training a convolutional neural network on Northwest Greenland satellite imagery.
+            </p>
+            <p class="about-me pad" style="width: 900;">
+                A similar study was conducted by Xin Lu et al. in the 2020 paper 
+                <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022169420301499?via%3Dihub">Small Arctic rivers mapped from Sentinel-2 satellite imagery and ArcticDEM</a>
+                using digital elevation models (DEMs) and Sentinel satellite data over a Siberian and an Alaskan river network. The researchers used Gabor filtering on the Sentinel data to identify areas likely to be river reaches, then refined these selections by overlaying a drainage model calculated from Arctic DEM data. The study found that incorporating the Arctic DEM simulated drainage data improved the connectivity of the generated river network. Our project will seek to accomplish the same objective - mapping of small Arctic rivers - relying solely on satellite imagery by using deep learning techniques in place of physical DEM modelling.
+            </p>
+            <p class="about-me pad" style="width: 900;">
+                The dataset we used for this project consists of a set of .tif image files, each matched with a manually digitized arcGIS shapefile representation of the stream network. These images were captured by the Worldview 3 satellite and were obtained from the UCLA GIS database. 
+            </p>
+        </div>
+
+        <div class="d-flex flex-column p-2 align-items-center">
+            <img src="../img/greenland-1.svg" alt="Image of architectural projections" width="80%" class="pad">
+        </div>
+
+    </body>
+</html>
