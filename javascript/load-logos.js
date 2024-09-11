@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('../main/logos.html')
+    fetch('../logos.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('logos-container').innerHTML = data;
