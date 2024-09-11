@@ -1,80 +1,86 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>Ellie Madsen</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="../index.css">
+        <link rel="stylesheet" href="../style.css">
         <link rel="shortcut icon" href="../img/tab-img.png"/>
     </head>
 
     <body>
 
         <!-- Navbar -->
-
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../home.html">
-                    <h3>ellie madsen</h3>
-                </a>
-            </div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a href="../work.html">work</a>
-                </li>
-                <li class="nav-item">
-                    <a href="../about.html">about</a>
-                </li>
-            </ul>
-
-        </nav>
+        <div id="navbar-container"></div>
+        <script src="../javascript/load-navbar.js"></script>  
           
         <!-- Content -->
 
-        <ul class="about-me">
-            <li class="about-me"><h1>trapped</h1></li>
-            <li class="about-me">fashion collection</li>
-            <li class="about-me">spring 2020</li>
-            <li class="about-me">fashion @ brown design team</li>
-            <li class="about-me"><a href="https://fashionatbrown.com/new-page-42">profile</a></li>
-        </ul>
+        <div class="d-flex flex-column align-items-left">
+
+            <div class="pad">
+                <h1>trapped</h1>
+                <p><a href="https://www.fashionatbrown.net/">fashion@brown</a> design team</p>
+                <p>featured in <a href="https://www.providencejournal.com/picture-gallery/news/local/2020/02/28/photos-brown-risd-students-showcase/68831121007/">The Providence Journal</a></p>
+            </div>
 
 
-        <div class="d-flex p-2 justify-content-center">
-            <img src="../img/trapped-10.png" alt="Image of Ellie altering jacket" height="500" class="pad">
-            <img src="../img/trapped-2.png" alt="Image of Ellie sewing jacket" height="500" class="pad">
-            <img src="../img/trapped-3.png" alt="Image of Ellie altering corset" height="500" class="pad">
-        </div>
+            <div class="d-flex flex-row">
+                <div>
+                    <img src="../img/trapped/trapped-10.png" alt="Image of Ellie presenting design crit">
+                </div>
+                <div>
+                    <img src="../img/trapped/trapped-2.png" alt="Image of Ellie sewing jacket">
+                </div>
+                <div>
+                    <img src="../img/trapped/trapped-3.png" alt="Image of Ellie altering corset">
+                </div>
+            </div>
+    
+            <div class="d-flex flex-row">
+                <div>
+                    <img src="../img/trapped/trapped-4.png" alt="Image of Ellie sewing jacket">
+                </div>
+                <div>
+                    <img src="../img/trapped/trapped-5.png" alt="Image of Ellie sewing jacket">
+                </div>
+            </div>
 
-        <div class="d-flex p-2 justify-content-center">
-            <img src="../img/trapped-4.png" alt="Image of Ellie sewing jacket" height="360" class="pad">
-            <img src="../img/trapped-5.png" alt="Image of Ellie sewing jacket" height="360" class="pad">
-        </div>
-
-        <div class="d-flex flex-column p-2 align-items-center">
-            <p class="about-me pad" style="width: 1000px;">
-                Designed and constructed in 2020, <i>trapped</i> is my first fashion collection. It consists of three outerwear pieces: overalls, corset, and jacket. Throughout the design process, I focused on the contrast between organic and manufactured elements while exploring themes of sustainability and constraint. All materials (fabric, metal hardware, stuffed animals, safety pins, gloves) were purchased second-hand.
+            <p class="pad">
+                Designed and constructed in 2020, <i>trapped</i> was my first runway fashion collection. It consists of three outerwear
+                pieces: overalls, corset, and jacket. Throughout the design process, I focused on the contrast between organic and manufactured
+                elements while exploring themes of sustainability and constraint. All materials (fabric, metal hardware, stuffed animals, safety
+                pins, gloves) were purchased second-hand.
             </p>
 
-            <p class="about-me pad" style="width: 1000px;">
+            <p class="pad">
                 <i>trapped</i> was showcased in the 10th annual Fashion @ Brown Runway Show in March 2020.
             </p>
 
-        </div>
+            <div class="d-flex flex-row">
+                <div>
+                <img src="../img/trapped/trapped-6.png" alt="Image of ">
+                </div>
+                <div>
+                    <img src="../img/trapped/trapped-7.png" alt="Image of ">
+                </div>
+                <div>
+                    <img src="../img/trapped/trapped-8.png" alt="Image of ">
+                </div>
+            </div>
 
-        <div class="d-flex p-2 justify-content-center">
-            <img src="../img/trapped-6.png" alt="Image of Ellie altering jacket" height="550" class="pad">
-            <img src="../img/trapped-7.png" alt="Image of Ellie sewing jacket" height="550" class="pad">
-            <img src="../img/trapped-8.png" alt="Image of Ellie altering corset" height="550" class="pad">
-        </div>
+            <div class="d-flex flex-row">
+                <div>
+                    <img src="../img/trapped/trapped-1.jpg" alt="Image of ">
+                </div>
+                <div>
+                    <img src="../img/trapped/trapped-11.png" alt="Image of ">
+                </div>
+            </div>
 
-        <div class="d-flex p-2 justify-content-center">
-            <img src="../img/trapped-1.jpg" alt="Image of Ellie altering jacket" height="600" class="pad">
-            <img src="../img/trapped-11.png" alt="Image of Ellie sewing jacket" height="600" class="pad">
+            <img src="../img/trapped/trapped-9.png" alt="Image of " width="100%" class="pad">
+            
         </div>
-
-        <div class="d-flex flex-column p-2 align-items-center">
-            <img src="../img/trapped-9.png" alt="Image of model home" width="1000" class="pad">
-        </div>
-
 
     </body>
 </html>
