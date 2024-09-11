@@ -1,6 +1,6 @@
 // Fetch CSV data from the server
 function fetchCSVData() {
-    return fetch('../javascript/books.csv')
+    return fetch('/javascript/books.csv')
         .then(response => response.text());
 }
 
