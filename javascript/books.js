@@ -1,7 +1,29 @@
-// Fetch CSV data from the server
+// fetch data from google sheets using cloud api key and construct CSV
 function fetchCSVData() {
-    return fetch('/javascript/books.csv')
-        .then(response => response.text());
+    const sheetId = '1moYiL52ZN9F20QZ-uYoO91Bh3AtkJYEoNcyv6MuRI2Y';
+    const sheetRange = 'Sheet1';
+    const apiKey = 'AIzaSyAGQtw4Jdd-BCe6-8PIRfUeQp8lwKJurfE';
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
+
+    // check if the field is empty or contains a comma --> wrap in " " if necessary
+    const wrapIfNecessary = (field) => {
+        return (field === '' || (field && field.includes(','))) ? `"${field}"` : field;
+    };
+
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            // Convert the sheet data (array of arrays) back into CSV format
+            return data.values.map(row => 
+                row.map(wrapIfNecessary).join(",")
+            ).join("\n");
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
 }
 
 // Convert CSV string to JavaScript objects
