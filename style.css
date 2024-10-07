@@ -40,6 +40,18 @@ li {
     margin: 20px;
 }
 
+figcaption {
+    padding-left: 20px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.caption {
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+}
+
 /* projects grid */
 .project {
     margin: 20px;
@@ -121,6 +133,22 @@ li {
     padding: 20px;
 }
 
+p.pad {
+    text-align:justify;
+}
+
+.quote {
+    font-style: italic;
+    color:gray;
+    margin-left: 25%;
+    margin-right:25%;
+    font-size: small;
+    padding:0%;
+    line-height: 20px;
+    text-align:justify;
+
+}
+
 .no-margin {
     margin: 0px;
 }
@@ -147,4 +175,40 @@ li {
     height: 100%;
     width: auto;
     display: block;
+}
+
+/* Carousel */
+
+.gallery-1 {
+	padding: 1rem;
+	display: grid;
+	grid-template-columns: repeat(15, 250px);
+	overflow: scroll;
+	height: 600px;
+}
+
+.gallery-2 {
+	padding: 1rem;
+	display: grid;
+	grid-template-columns: repeat(14, 350px);
+	overflow: scroll;
+	height: 600px;
+}
+
+
+.gallery-img {
+    height: 500px;  
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 600px;
+}
+
+.arrow {
+    width: 80px;
+    height: 80px;
 }
