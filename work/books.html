@@ -12,14 +12,33 @@
 
         <!-- Navbar -->
         <div id="navbar-container"></div>
-        <script src="/javascript/load-navbar.js"></script> 
+        <script src="/scripts/load-navbar.js"></script> 
+
           
         <!-- Content -->
         <div class="d-flex flex-column wide-flex">
 
             <div class="buffer">
-                <h1>every book i've ever read</h1>
-                <p>an interactive digital library built with javascript, <a href="https://www.goodreads.com/review/list/20954505?shelf=read">goodreads</a>, and <a href="https://openlibrary.org/developers/api">open library api</a></p>
+                <h1>digital library</h1>
+                <p>an interactive virtual library containing every book i've read.</p>
+
+                <p>built with 
+                    <a href="https://www.goodreads.com/review/list/20954505?shelf=read">goodreads</a>,
+                    <a href="https://openlibrary.org/developers/api">open library api</a>, and 
+                    <a href="https://github.com/UKPLab/sentence-transformers">sentence transformers</a>,
+                    an open-source embedding model framework.
+                    sentence embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a>
+                    was used to map book description and metadata to a 384-dimensional dense vector space of semantic clusters.
+                    <a href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html">TSNE</a>
+                    (t-distributed stochastic neighbor embedding)
+                    was then applied to visualize the data in two dimensions.
+                </p>
+                <p>
+                    coded in python, javascript, and html. you can find the offline vector encoding source code in
+                    <a href="https://colab.research.google.com/drive/1qWvPWf0911Iw9kkd6QiwmBph-Zbv15jb?usp=sharing">colab</a>
+                    and the frontend visualization code in
+                    <a href="https://github.com/elliemadsen/elliemadsen.github.io/blob/master/javascript/books.js">github</a>.
+                </p>
 
                 <div class="d-flex flex-row flex-wrap">
                     <!-- sort by -->
@@ -51,14 +70,31 @@
                         </select>
                     </div>
                 </div>
+
+                <h1>graph</h1>
+                <p>a nearest-neighbors graph of 2-dimensional book embeddings. similar books are located nearer in
+                    space, forming visual clusters representing semantic similarity.
+                </p>
+
             </div>
 
         </div>
 
 
+
+        <div id="embeddingChart"></div>
+
+        <br><br><br>
+
+        <div class="d-flex flex-column wide-flex">
+            <div class="buffer">
+                <h1>bookshelf</h1>
+            </div>
+        </div>
+
         <div class="d-flex flex-wrap wide-flex justify-content-center align-items-center" id="book-container"></div>
 
-        <script src="/javascript/books.js"></script>
+        <script src="/scripts/books.js"></script>
 
 
     </body>

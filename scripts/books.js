@@ -6,38 +6,34 @@ function fetchCSVData() {
 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
 
-    // check if the field is empty or contains a comma --> wrap in " " if necessary
-    const wrapIfNecessary = (field) => {
-        return (field === '' || (field && field.includes(','))) ? `"${field}"` : field;
-    };
-
     return fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            // Convert the sheet data (array of arrays) back into CSV format
-            return data.values.map(row => 
-                row.map(wrapIfNecessary).join(",")
-            ).join("\n");
+            const rows = data.values;
+            const headers = rows[0];
+            return rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((header, index) => {
+                    if (header.trim() === "embedding") {
+                        obj[header.trim()] = JSON.parse(row[index] || '[]');
+                    } else if (header.trim() === "embedding_2d") {
+                        const embedding = JSON.parse(row[index] || '[0,0]');
+                        if (embedding.length >= 2) {
+                            console.log(embedding[0])
+                            obj["x"] = embedding[0];
+                            obj["y"] = embedding[1];
+                        }
+                    } else {
+                        obj[header.trim()] = row[index] || '';
+                    }
+                });
+                return obj;
+            });
         })
         .catch(error => {
             console.error('Error fetching data:', error);
             throw error;
         });
-}
-
-// Convert CSV string to JavaScript objects
-function csvToObjects(csvString) {
-    const lines = csvString.trim().split('\n');
-    const headers = parseCSVLine(lines[0]);
-    return lines.slice(1).map(line => {
-        const values = parseCSVLine(line);
-        const obj = {};
-        headers.forEach((header, index) => {
-            obj[header.trim()] = values[index] || '';
-        });
-        return obj;
-    });
 }
 
 // Parse a CSV line, handling quoted fields
@@ -52,10 +48,10 @@ function parseCSVLine(line) {
 }
 
 // Generate HTML for book objects
-function generateBookHTML(books) {
+function generateBooksHTML(books) {
     return books.map(book => `
     <div class="book">
-        <img src="https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg" alt="${book.title} cover" class="book-image">
+        <img src="https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg" alt="${book.title}" class="book-image">
         <div class="flex-column book-text">
             <p class="book-title">${book.title}</p>
             <p>${book.author}</p>
@@ -63,6 +59,19 @@ function generateBookHTML(books) {
         </div>
     </div>
     `).join('');
+}
+
+function generateBookHTML(book, x, y) {
+    return `
+    <div class="book" style="position: absolute; left: ${x - 25}px; top: ${y - 35}px;">
+        <img src="https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg" alt="${book.title}" class="book-image" style="width: 50px; height: 75px; transition: transform 0.3s;">
+        <div class="flex-column book-text">
+            <p class="book-title">${book.title}</p>
+            <p>${book.author}</p>
+            <p class="rating">${'★'.repeat(book.rating)}</p>
+        </div>
+    </div>
+    `
 }
 
 // Sort books based on criteria
@@ -104,19 +113,69 @@ function filterBooksByAuthor(books, author) {
 }
 
 // Load books, sort, and filter based on user input
-function loadAndDisplayBooks(sortBy, selectedShelf, selectedAuthor) {
+function displayBooks(sortBy, selectedShelf, selectedAuthor) {
     fetchCSVData()
         .then(csvData => {
-            console.log(selectedAuthor);
-            const books = csvToObjects(csvData);
-            const shelfBooks = filterBooksByShelf(books, selectedShelf);
+            const allBooks = (csvData);
+            const shelfBooks = filterBooksByShelf(allBooks, selectedShelf);
             const authorBooks = filterBooksByAuthor(shelfBooks, selectedAuthor);
             const sortedBooks = sortBooks(authorBooks, sortBy);
-            document.getElementById('book-container').innerHTML = generateBookHTML(sortedBooks);
+            document.getElementById('book-container').innerHTML = generateBooksHTML(sortedBooks);
+
+            createScatterPlot(allBooks, sortedBooks);
+
         })
         .catch(error => {
             console.error('Error fetching or processing CSV:', error);
         });
+}
+
+// Generate HTML element for scatter plot of selected books based on x and y values, normalized for all books
+function createScatterPlot(allBooks, books) {
+    const container = document.getElementById('embeddingChart');
+    container.innerHTML = '';
+    container.style.position = 'relative';
+    container.style.width = '1400px';
+    container.style.height = '600px';
+
+    // Find min and max values across all books for scaling the positions
+    const minX = Math.min(...allBooks.map(book => book.x));
+    const maxX = Math.max(...allBooks.map(book => book.x));
+    const minY = Math.min(...allBooks.map(book => book.y));
+    const maxY = Math.max(...allBooks.map(book => book.y));
+
+    // Normalize the positions of selected books (scale them to fit inside the container)
+    books.forEach(book => {
+        const normalizedX = (book.x - minX) / (maxX - minX) * container.offsetWidth;
+        const normalizedY = (book.y - minY) / (maxY - minY) * container.offsetHeight;
+        console.log('book.x: ', book.x)
+        console.log('maxX: ', maxX)
+        console.log('minX: ', minX)
+        console.log('container.offsetWidth: ', container.offsetWidth)
+        console.log('normalizedX: ', normalizedX)
+
+
+        bookHTML = generateBookHTML(book, normalizedX - 25, normalizedY - 35)
+        container.innerHTML += bookHTML;
+
+        // // Create the img element for the book cover
+        // const img = document.createElement('img');
+        // img.src = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+        // img.alt = book.title;
+        // img.style.position = 'absolute';
+        // img.style.left = `${normalizedX - 25}px`;
+        // img.style.top = `${normalizedY - 35}px`;
+        // img.style.width = '50px';
+        // img.style.height = '75px';
+        // img.style.transition = 'transform 0.3s';
+        // img.className = 'book-image';
+
+        // // Append the img to the container
+        // container.appendChild(img);
+
+
+
+    });
 }
 
 // Populate authors dropdown including all authors with > 2 books in the library
@@ -134,8 +193,6 @@ function populateAuthorfDropdown() {
         .filter(([author, count]) => count > 2)
         .map(([author]) => author)
         .sort();
-
-    console.log(authorsWithMultipleBooks);
         
     const authorSelect = document.getElementById('author-select');
 
@@ -177,7 +234,7 @@ function processEvent() {
     const sortBy = document.getElementById('sort-select').value;
     const selectedShelf = document.getElementById('shelf-select').value;
     const selectedAuthor = document.getElementById('author-select').value;
-    loadAndDisplayBooks(sortBy, selectedShelf, selectedAuthor);
+    displayBooks(sortBy, selectedShelf, selectedAuthor);
 }
 
 // Event listeners
@@ -190,10 +247,10 @@ document.getElementById('author-select').addEventListener('change', (event) => {
 window.addEventListener('load', () => {
     fetchCSVData()
         .then(csvData => {
-            allBooks = csvToObjects(csvData);
+            allBooks = (csvData);
             populateShelfDropdown();
             populateAuthorfDropdown();
-            loadAndDisplayBooks('date read', '', ''); // Default sorting and no filter
+            displayBooks('date read', '', ''); // Default sorting and no filter
         })
         .catch(error => {
             console.error('Error fetching or processing CSV:', error);

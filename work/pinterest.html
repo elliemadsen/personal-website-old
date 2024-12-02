@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ellie Madsen</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/img/tab-img.png"/>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+    <script src="/scripts/load-navbar.js"></script>
+
+    <!-- Content -->
+
+    <div class="d-flex flex-column align-items-left">
+
+        <div class="pad">
+            <h1>pinterest</h1>
+            <p>software engineering <br> 2022-present</p>
+
+            <img src="/img/pinterest/pinterest-4.webp" alt="Image of " width="100%">
+
+            <h2>I am a software engineer at Pinterest on the Core Retrieval Infra team.</h2>
+
+            <p>My team builds and maintains software infrastructure that indexes and retrieves Pinterest's
+                core data (pins, users, boards, ads, etc).</p>
+
+            <h2>The retrieval system I work on is called Manas.</h2>
+            
+            <p>
+                My team manages over 50 clusters across the company, ranging from 
+                thousands to billions of documents per node. We use kubernetes for cluster management.
+            </p>
+            <p>
+                Manas is a distributed system and uses root-leaf fanout architecture. It includes vertical and horizontal
+                scaling and is responsive to changes in traffic quantity and data size.
+            </p>
+
+            <h2>Manas performs two types of search: token and embedding </h2>
+            <p>Token retrieval is the classic search-by-keyword use case. Given a forward index (document->term), we build
+                inverted indexes (term->document) called posting lists. This allows us to perform efficient
+                term matching using nested tree-based queries on billion-scale distributed corpuses.</p>
+            <p>Embedding retrieval (sometimes referred to as approximate nearest neighbor, similarity search, or vector database)
+                is where the exciting stuff happens. Training models to represent arbitrary data as
+                embeddings and mapping them in n-dimensional space
+                allows us to search for data based on semantic similarity using simple functions like inner product.
+                It's what powers features like related pins or visual search.
+            </p>
+
+            <div class="d-flex flex-column align-items-center">
+                <img src="/img/pinterest/pinterest-1.jpg" alt="Image of " width="100%" class="pad">
+            </div>
+            <p class="caption">3-dimensional embedding space</p>
+
+            <h2>Within Manas, I specialize in embedding retrieval.</h2>
+            <p>Manas supports two ANN algorithms: HNSW (hierarchical navigable small world) graph, and IVF (inverted file index).</p>
+
+            <div class="d-flex flex-column align-items-center">
+                <img src="/img/pinterest/pinterst-3.png" alt="Image of " width="120%" class="pad">
+            </div>
+            <p class="caption">hierarchical navigable small world graph data structure</p>
+
+            <p>Some ANN projects I've worked on include online recall monitoring, support for 8-bit embeddings,
+                and most recently, embedding quantization.</p>
+            <p>Quantization is a type of vector compression that reduces the data size and memory usage</p>
+
+            <div class="d-flex flex-column align-items-center">
+                <img src="/img/pinterest/pinterest-2.png" alt="Image of " width="120%" class="pad">
+            </div>
+            <p class="caption">product quantization</p>
+
+            <h2>I'm also familiar with ML serving.</h2>
+            <p>
+                I led a migration from a local embedded scoring system to a remote GPU server.
+                This allowed us to decouple data sharding (fanout to more nodes) from ML computation
+                (run larger batches on fewer nodes).
+                It also saved a few million dollars a year.
+            </p>
+
+            <h2>And tooling.</h2>
+
+
+
+            <h2>I'm proud of a few other achievements during my time at Pinterest too.</h2>
+
+            <p>
+            - top c++ code contributor
+            - hackathon winner
+            - 2-time c++ bug fixathon winner
+            - mentoring new hires 
+            - working on pinplanet, the employee-led sustainability group
+            </p>
+
+
+        </div>
