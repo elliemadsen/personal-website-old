@@ -1,102 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Ellie Madsen</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="/style.css">
-        <link rel="shortcut icon" href="/img/tab-img.png"/>
-    </head>
+  <head>
+    <title>Ellie Madsen</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="shortcut icon" href="/img/tab-img.png" />
+  </head>
 
-    <body>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+    <script src="/scripts/load-navbar.js"></script>
 
-        <!-- Navbar -->
-        <div id="navbar-container"></div>
-        <script src="/scripts/load-navbar.js"></script> 
+    <!-- Content -->
+    <div class="d-flex flex-column wide-flex">
+      <div class="buffer">
+        <h1>digital library</h1>
+        <p>an interactive virtual library containing every book i've read.</p>
 
-          
-        <!-- Content -->
-        <div class="d-flex flex-column wide-flex">
+        <p>
+          built with
+          <a href="https://www.goodreads.com/review/list/20954505?shelf=read"
+            >goodreads</a
+          >,
+          <a href="https://openlibrary.org/developers/api">open library api</a>,
+          <a href="https://d3js.org/">d3.js</a>, and
+          <a href="https://github.com/UKPLab/sentence-transformers"
+            >sentence transformers</a
+          >. I used open-source embedding model
+          <a
+            href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"
+            >all-MiniLM-L6-v2</a
+          >
+          to embed book description and metadata to a 384-dimensional dense
+          vector space of semantic clusters. I then applied
+          <a
+            href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html"
+            >TSNE</a
+          >
+          (t-distributed stochastic neighbor embedding) to visualize the data in
+          two dimensions.
+        </p>
+        <p>
+          you can find the offline vector encoding source code in
+          <a
+            href="https://colab.research.google.com/drive/1qWvPWf0911Iw9kkd6QiwmBph-Zbv15jb?usp=sharing"
+            >colab</a
+          >
+          and the frontend interface and visualization code in
+          <a
+            href="https://github.com/elliemadsen/elliemadsen.github.io/blob/master/javascript/books.js"
+            >github</a
+          >.
+        </p>
 
-            <div class="buffer">
-                <h1>digital library</h1>
-                <p>an interactive virtual library containing every book i've read.</p>
+        <div class="d-flex flex-row flex-wrap">
+          <!-- sort by -->
+          <div class="pad">
+            <label for="sort-select">sort by:</label>
+            <select id="sort-select" class="form-control">
+              <option value="date read">date read</option>
+              <option value="author">author</option>
+              <option value="title">title</option>
+              <option value="rating">rating</option>
+            </select>
+          </div>
 
-                <p>built with 
-                    <a href="https://www.goodreads.com/review/list/20954505?shelf=read">goodreads</a>,
-                    <a href="https://openlibrary.org/developers/api">open library api</a>, and 
-                    <a href="https://github.com/UKPLab/sentence-transformers">sentence transformers</a>,
-                    an open-source embedding model framework.
-                    sentence embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a>
-                    was used to map book description and metadata to a 384-dimensional dense vector space of semantic clusters.
-                    <a href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html">TSNE</a>
-                    (t-distributed stochastic neighbor embedding)
-                    was then applied to visualize the data in two dimensions.
-                </p>
-                <p>
-                    coded in python, javascript, and html. you can find the offline vector encoding source code in
-                    <a href="https://colab.research.google.com/drive/1qWvPWf0911Iw9kkd6QiwmBph-Zbv15jb?usp=sharing">colab</a>
-                    and the frontend visualization code in
-                    <a href="https://github.com/elliemadsen/elliemadsen.github.io/blob/master/javascript/books.js">github</a>.
-                </p>
+          <!-- filter by shelf -->
+          <div class="pad">
+            <label for="shelf-select">filter by bookshelf:</label>
+            <select id="shelf-select" class="form-control">
+              <option value="">all</option>
+              <!-- options are populated dynamically -->
+            </select>
+          </div>
 
-                <div class="d-flex flex-row flex-wrap">
-                    <!-- sort by -->
-                    <div class="pad">
-                        <label for="sort-select">sort by:</label>
-                        <select id="sort-select" class="form-control">
-                            <option value="date read">date read</option>
-                            <option value="author">author</option>
-                            <option value="title">title</option>
-                            <option value="rating">rating</option>
-                        </select>
-                    </div>
-
-                    <!-- filter by shelf -->
-                    <div class="pad">
-                        <label for="shelf-select">filter by bookshelf:</label>
-                        <select id="shelf-select" class="form-control">
-                            <option value="">all</option>
-                            <!-- options are populated dynamically -->
-                        </select>
-                    </div>
-
-                    <!-- filter by author -->
-                    <div class="pad">
-                        <label for="author-select">filter by top authors:</label>
-                        <select id="author-select" class="form-control">
-                            <option value="">all</option>
-                            <!-- options are populated dynamically -->
-                        </select>
-                    </div>
-                </div>
-
-                <h1>graph</h1>
-                <p>a nearest-neighbors graph of 2-dimensional book embeddings. similar books are located nearer in
-                    space, forming visual clusters representing semantic similarity.
-                </p>
-
-            </div>
-
+          <!-- filter by author -->
+          <div class="pad">
+            <label for="author-select">filter by top authors:</label>
+            <select id="author-select" class="form-control">
+              <option value="">all</option>
+              <!-- options are populated dynamically -->
+            </select>
+          </div>
         </div>
 
+        <h1>graph</h1>
+        <p>
+          a nearest-neighbors graph of 2-dimensional book embeddings. similar
+          books are located nearer in space, creating a visualization where
+          proximity represents semantic similarity. use the above filters to
+          explore thematic clusters. pinch to zoom, drag to pan.
+        </p>
 
-
+        <script src="https://d3js.org/d3.v6.min.js"></script>
         <div id="embeddingChart"></div>
 
-        <br><br><br>
+        <h1>bookshelf</h1>
+        <p>a list of read books, filtered and ordered by user input.</p>
 
-        <div class="d-flex flex-column wide-flex">
-            <div class="buffer">
-                <h1>bookshelf</h1>
-            </div>
-        </div>
-
-        <div class="d-flex flex-wrap wide-flex justify-content-center align-items-center" id="book-container"></div>
-
+        <div
+          class="d-flex flex-wrap wide-flex justify-content-center align-items-center"
+          id="book-container"
+        ></div>
         <script src="/scripts/books.js"></script>
-
-
-    </body>
-
+      </div>
+    </div>
+  </body>
 </html>

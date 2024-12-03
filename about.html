@@ -1,49 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Ellie Madsen</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-        <link rel="shortcut icon" href="img/tab-img.png"/>
-    </head>
+  <head>
+    <title>Ellie Madsen</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="img/tab-img.png" />
+  </head>
 
-    <body>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+    <script>
+      window.currentPage = "about";
+    </script>
+    <script src="scripts/load-navbar.js"></script>
 
-        <!-- Navbar -->
-        <div id="navbar-container"></div>
-        <script>window.currentPage = 'about';</script>    
-        <script src="scripts/load-navbar.js"></script>
+    <!-- About Me -->
+    <div class="d-flex justify-content-center align-items-center">
+      <p>✧˖°</p>
+      <img src="img/me.jpg" alt="Image of me" height="250" />
+      <p>°˖✧</p>
+    </div>
 
-        <!-- About Me -->
-        <div class="d-flex justify-content-center align-items-center">
-            <p>✧˖°</p>
-            <img src="img/me.jpg" alt="Image of me" height="250">
-            <p>°˖✧</p>
-        </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <ul>
+        <li class="large-title">i am a</li>
+        <li>
+          software engineer at
+          <a href="https://www.pinterest.com/elliemadsen11/" target="_blank"
+            >pinterest</a
+          >
+        </li>
+        <li>
+          graduate of
+          <a href="https://ibes.brown.edu" target="_blank"
+            >environmental studies</a
+          >
+          and
+          <a href="https://cs.brown.edu" target="_blank">computer science</a>
+          from
+          <a href="https://www.brown.edu" target="_blank">brown university</a>
+        </li>
 
-        <div class="d-flex flex-wrap justify-content-center">
-            <ul>
-                <li class="large-title">i am a</li>
-                <li>software engineer at <a href="https://www.pinterest.com/elliemadsen11/" target="_blank">pinterest</a></li>
-                <li>graduate of <a href="https://ibes.brown.edu" target="_blank">environmental studies</a> and <a href="https://cs.brown.edu" target="_blank">computer science</a> from <a href="https://www.brown.edu" target="_blank">brown university</a></li>
-                
-                <li class="large-title">experienced in</li>
-                <li>distributed systems, retrieval infrastructure, cluster management, vector databases, embedding quantization, similarity search</li>
-                <li><a href="https://www.providenceri.gov/sustainability/">municipal government</a> and <a href="https://www.zerowasteprovidence.com/">nonprofit</a> urban sustainability, environmental policy, and climate justice</li>
-                <li><a href="https://responsible.cs.brown.edu/">socially responsible computing</a> curriculum development and education</li>
-                <li>c++, java, python, html/css, javascript, linux, aws, rhino, grasshopper, figma</li>
-                
-                <li class="large-title">interested in</li>
-                <li>computational design, computer graphics, data visualization, organic architecture, sustainable design in the built environment</li>
+        <li class="large-title">experienced in</li>
+        <li>
+          distributed systems, retrieval infrastructure, cluster management,
+          vector databases, embedding quantization, similarity search
+        </li>
+        <li>
+          <a href="https://www.providenceri.gov/sustainability/"
+            >municipal government</a
+          >
+          and <a href="https://www.zerowasteprovidence.com/">nonprofit</a> urban
+          sustainability, environmental policy, and climate justice
+        </li>
+        <li>
+          <a href="https://responsible.cs.brown.edu/"
+            >socially responsible computing</a
+          >
+          curriculum development and education
+        </li>
+        <li>
+          c++, java, python, html/css, javascript, linux, aws, rhino,
+          grasshopper, figma
+        </li>
 
-            </ul>
-        </div>
+        <li class="large-title">interested in</li>
+        <li>
+          computational design, computer graphics, data visualization, organic
+          architecture, sustainable design in the built environment
+        </li>
+      </ul>
+    </div>
 
-        <!-- Logos -->
-        <div id="logos-container"></div>
-        <script src="scripts/load-logos.js"></script>
-
-
-    </body>
+    <!-- Logos -->
+    <div id="logos-container"></div>
+    <script src="scripts/load-logos.js"></script>
+  </body>
 </html>

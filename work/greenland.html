@@ -1,89 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Ellie Madsen</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="/style.css">
-        <link rel="shortcut icon" href="/img/tab-img.png"/>
-    </head>
+  <head>
+    <title>Ellie Madsen</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="shortcut icon" href="/img/tab-img.png" />
+  </head>
 
-    <body>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+    <script src="/scripts/load-navbar.js"></script>
 
+    <!-- Content -->
+    <div class="d-flex flex-column align-items-left">
+      <div class="pad">
+        <h1>
+          producing greenland ice sheet river networks from satellite imagery
+        </h1>
+        <p>deep learning</p>
+        <p>collaboration with nicholas petrocelli and sarah esenther</p>
+        <p>
+          <a href="https://github.com/nickpetrocelli/CSCI1470FinalProj"
+            >github repository</a
+          >
+        </p>
+      </div>
 
-        <!-- Navbar -->
-        <div id="navbar-container"></div>
-        <script src="/scripts/load-navbar.js"></script> 
-          
-        <!-- Content -->
-        <div class="d-flex flex-column align-items-left">
+      <img
+        src="/img/greenland/greenland-2.jpeg"
+        alt="Image of "
+        width="100%"
+        class="pad"
+      />
 
-            <div class="pad">
-                <h1>producing greenland ice sheet river networks from satellite imagery</h1>
-                <p>deep learning</p>
-                <p>collaboration with nicholas petrocelli and sarah esenther</p>
-                <p><a href="https://github.com/nickpetrocelli/CSCI1470FinalProj">github repository</a></p>
-            </div>
-            
-            <img src="/img/greenland/greenland-2.jpeg" alt="Image of " width="100%" class="pad">
+      <p class="pad">
+        Complex stream networks have been observed in detail on the Southwest
+        Greenland Ice Sheet. These channels control drainage efficiency and
+        timing, which has important effects on the rates of local surface melt,
+        ice sliding velocity, and sea level rise. However, because the channels
+        are only 1-20 m wide and are highly dynamic over space and time, they
+        require repeated high resolution satellite imagery to map. Multiple
+        semi-automated methods have been proposed to detect the streams from
+        satellite imagery, but these methods have not used artificial
+        intelligence techniques and heavily rely on tedious manual labor. To
+        advance this research, for our final project in
+        <a
+          href="https://brown-deep-learning.github.io/dl-website-2021/index.html"
+          >CSCI 1470: Deep Learning</a
+        >
+        we sought to use deep learning to digitize these networks by training a
+        convolutional neural network on Northwest Greenland satellite imagery.
+      </p>
 
-            <p class="pad">
-                Complex stream networks have been observed in detail on the Southwest Greenland Ice Sheet. These channels control
-                drainage efficiency and timing, which has important effects on the rates of local surface melt, ice sliding velocity,
-                and sea level rise. However, because the channels are only 1-20 m wide and are highly dynamic over space and time, they
-                require repeated high resolution satellite imagery to map. Multiple semi-automated methods have been proposed to
-                detect the streams from satellite imagery, but these methods have not used artificial intelligence techniques and
-                heavily rely on tedious manual labor.
-                To advance this research, for our final project in 
-                <a href="https://brown-deep-learning.github.io/dl-website-2021/index.html">CSCI 1470: Deep Learning</a>
-                we sought to use deep learning to digitize these networks by training a convolutional neural network on Northwest
-                Greenland satellite imagery.
-            </p>
+      <img
+        src="/img/greenland/greenland-5.png"
+        alt="Image of "
+        width="100%"
+        class="pad"
+      />
 
-            <img src="/img/greenland/greenland-5.png" alt="Image of " width="100%" class="pad">
+      <p class="pad">
+        We used a high-resolution July 2012 Worldview satellite image and two
+        manually digitized river networks to train a convolutional neural
+        network as an image segmentation problem. The satellite image and
+        corresponding rasterized shapefile networks were split into 100 pixel
+        (50m) squares for training. 70% of the image tiles were used for
+        training and 30% of the image tiles were used for testing; as the
+        distribution of the river network was relatively uniform across both
+        networks, tiles were shuffled randomly during training.
+      </p>
 
-            <p class="pad">
-                We used a high-resolution July 2012 Worldview satellite image and two manually digitized river networks to train a
-                convolutional neural network as an image segmentation problem. The satellite image and corresponding rasterized
-                shapefile networks were split into 100 pixel (50m) squares for training. 70% of the image tiles were used for
-                training and 30% of the image tiles were used for testing; as the distribution of the river network was relatively 
-                uniform across both networks, tiles were shuffled randomly during training.
-            </p>
+      <div class="d-flex flex-column align-items-center">
+        <img
+          src="/img/greenland/greenland-8.png"
+          alt="Image of "
+          width="80%"
+          class="pad"
+        />
+      </div>
 
-            <div class="d-flex flex-column align-items-center">
-                <img src="/img/greenland/greenland-8.png" alt="Image of " width="80%" class="pad">
-            </div>
+      <p class="pad">
+        Our model's architecture is comprised of four convolutional layers to
+        extract features, then three linear layers to produce the segmented
+        output.
+      </p>
 
-            <p class="pad">
-                Our model's architecture is comprised of four convolutional layers to extract features, then three linear layers
-                to produce the segmented output.
-            </p>
+      <div class="d-flex flex-column align-items-center">
+        <img
+          src="/img/greenland/greenland-4.png"
+          alt="Image of "
+          width="100%"
+          class="pad"
+        />
+      </div>
 
-            <div class="d-flex flex-column align-items-center">
-                <img src="/img/greenland/greenland-4.png" alt="Image of " width="100%" class="pad">
-            </div>
+      <p class="pad">
+        To evaluate the model, we initially utilized a basic cross-entropy loss
+        while training the model, and a simple accuracy metric (correctly
+        classified pixels : all pixels) to evaluate. When training and
+        evaluating the model over 5 epochs using this loss, however, to minimize
+        loss the model would output blank images with ~96% pixel accuracy, due
+        to the reletave absence of positive area in the training images, or
+        output noisy results with ~66% pixel accuracy.
+      </p>
 
-            <p class="pad">
-                To evaluate the model, we initially utilized a basic cross-entropy loss while training the model, and a simple accuracy
-                metric (correctly classified pixels : all pixels) to evaluate. When training and evaluating the model over 5 epochs using
-                this loss, however, to minimize loss the model would output blank images with ~96% pixel accuracy, due to
-                the reletave absence of positive area in the training images, or output noisy results with ~66% pixel accuracy.
-            </p>
+      <div class="d-flex flex-column align-items-center">
+        <img
+          src="/img/greenland/greenland-7.png"
+          alt="Image of "
+          width="80%"
+          class="pad"
+        />
+      </div>
 
-            <div class="d-flex flex-column align-items-center">
-                <img src="/img/greenland/greenland-7.png" alt="Image of " width="80%" class="pad">
-            </div>
-
-            <p class="pad">
-                We suspect the model may not have had sufficient training data to find optimal layer weights. This could be improved in
-                future studies by inclusion of more training data, which would require more manual digitization of stream networks.
-                Alternatively, given the prevalence of melt ponds on the surface of the ice sheet that resemble river stretches, the task
-                may be aided by a more specific approach than blackbox network training. For example, performing edge detection and filtering
-                results to include stretches above a threshold number of adjacent pixels may be used to outline river stretches.
-                Deep learning might find a similar procedure with more data, but a non deep-learning approach may be more appropriate in this
-                relatively data-poor scenario.
-            </p>
-        </div>
-
-    </body>
+      <p class="pad">
+        We suspect the model may not have had sufficient training data to find
+        optimal layer weights. This could be improved in future studies by
+        inclusion of more training data, which would require more manual
+        digitization of stream networks. Alternatively, given the prevalence of
+        melt ponds on the surface of the ice sheet that resemble river
+        stretches, the task may be aided by a more specific approach than
+        blackbox network training. For example, performing edge detection and
+        filtering results to include stretches above a threshold number of
+        adjacent pixels may be used to outline river stretches. Deep learning
+        might find a similar procedure with more data, but a non deep-learning
+        approach may be more appropriate in this relatively data-poor scenario.
+      </p>
+    </div>
+  </body>
 </html>
