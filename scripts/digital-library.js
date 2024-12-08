@@ -64,23 +64,6 @@ function generateBooksHTML(books) {
     .join("");
 }
 
-// Generate HTML for one book object with absolute position and width (graph)
-function generateBookHTML(book, x, y) {
-  return `
-    <div class="book" style="position: absolute; left: ${x - 25}px; top: ${
-    y - 35
-  }px;">
-        <img src="https://covers.openlibrary.org/b/isbn/${
-          book.isbn
-        }-L.jpg" alt="${book.title}" class="book-image" style="width: 50px;">
-        <div class="flex-column book-text-small">
-            <p>${book.title}</p>
-            <p>${book.author}</p>
-        </div>
-    </div>
-    `;
-}
-
 // Sort books based on criteria
 function sortBooks(books, criteria) {
   function sortByDate(a, b) {
@@ -191,7 +174,7 @@ function createScatterPlot(allBooks, books) {
     return ((value - min) / (max - min)) * size;
   }
 
-  book_width = 30;
+  book_width = 40;
   book_height = book_width * 1.5;
 
   // Add book covers
