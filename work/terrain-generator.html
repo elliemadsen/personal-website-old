@@ -38,7 +38,7 @@
 
       <img
         src="/img/terrain-generator/terrain-2.webp"
-        alt="Image of architectural projections"
+        alt="Image of procedurally generated terrain."
         width="100%"
         class="pad"
       />
@@ -50,10 +50,7 @@
         built an interactive terrain environment that is rendered in real time.
         It includes a procedurally generated landscape of three different biomes
         (hills, mountains, and plains) with three different light settings (day,
-        dusk, and night).
-      </p>
-
-      <p class="pad">
+        dusk, and night). <br /><br />
         The model is rendered with OpenGL and coded in C++ with GLSL for the
         shaders. We built the project in QT Creator, allowing users to build and
         run the program as an app. In the app, users can change the scale and
@@ -65,7 +62,7 @@
 
       <img
         src="/img/terrain-generator/terrain-1.webp"
-        alt="Image of model home"
+        alt="Image of procedurally generated terrain."
         width="100%"
         class="pad"
       />
@@ -81,7 +78,7 @@
 
       <img
         src="/img/terrain-generator/terrain-3.webp"
-        alt="Image of model home"
+        alt="Image of procedurally generated terrain."
         width="100%"
         class="pad"
       />
@@ -96,13 +93,66 @@
         based on y-value. The level of normal mapping applied at different
         points in the scene is adaptive based on camera view, such that points
         closest to the camera are most detailed.
-      </p>
-
-      <p class="pad">
+        <br /><br />
         To add a fog effect, we calculate a fog color using a linear equation,
         interpolate between the fog color and the terrain color values, and
         apply this to the Phong lighting model.
       </p>
+
+      <img
+        src="/img/terrain-generator/terrain-4.png"
+        alt="Image of procedurally generated terrain."
+        width="100%"
+        class="pad"
+      />
+
+      <h3 class="pad">Ray Trace Renderer</h3>
+      <p class="pad">
+        Also in Computer Graphics, I independently wrote a recursive ray tracer
+        in C++. This project involved implementing core ray tracing techniques
+        from scratch. To render the geometry, I calculated ray intersections
+        with basic primitives (spheres, cubes, cones, cylinders) using implicit
+        equations. I created a camera model to generate rays through each pixel
+        of the image plane and handled transformations between world space,
+        camera space, and object space. For the lighting, I implemented a Phong
+        illumination model with directional lights, including calculations for
+        ambient, diffuse, and specular reflections. The program can also render
+        advanced lighting effects, including point lights, spot lights with
+        attenuation, and realistic shadows. I then wrote custom texture mapping
+        by calculating UV coordinates for each shape and blending the texture
+        with the object's diffuse color. Finally I implemented recursive
+        inter-object reflections to accurately simulate interactions between
+        shiny objects in the scene.
+      </p>
+      <div class="d-flex flex-row">
+        <img
+          src="/img/terrain-generator/ray-1.png"
+          alt="Image of raytraced objects"
+          style="width: 50%; object-fit: cover"
+        />
+        <img
+          src="/img/terrain-generator/ray-2.png"
+          alt="Image of raytraced objects"
+          style="width: 50%; object-fit: cover"
+        />
+      </div>
+      <div class="d-flex flex-row">
+        <img
+          src="/img/terrain-generator/ray-3.png"
+          alt="Image of raytraced objects"
+          style="width: 33%; object-fit: cover"
+        />
+        <img
+          src="/img/terrain-generator/ray-4.png"
+          alt="Image of raytraced objects"
+          style="width: 33%; object-fit: cover"
+        />
+        <img
+          src="/img/terrain-generator/ray-5.png"
+          alt="Image of raytraced objects"
+          style="width: 33%; object-fit: cover"
+        />
+      </div>
     </div>
   </body>
 </html>

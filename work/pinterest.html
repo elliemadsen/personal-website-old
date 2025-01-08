@@ -36,116 +36,215 @@
           src="/img/pinterest/pinterest-4.webp"
           alt="Image of "
           width="100%"
+          class="margin-bottom"
         />
 
-        <h2>
-          I am a software engineer at Pinterest on the Core Retrieval Infra
-          team.
-        </h2>
-
+        <br /><br />
+        <h3>Semantic Search</h3>
         <p>
-          My team builds and maintains software infrastructure that indexes and
-          retrieves Pinterest's core data (pins, users, boards, ads, etc).
+          As a software engineer at Pinterest, I specialize in the retrieval
+          infrastructure domain, specifically embedding graphs. Pinterest is a
+          platform for searching and collecting images. Embedding retrieval is
+          used to recommend users visually or semantically similar images.
+          <br /><br />
+          An embedding is a numerical vector trained using a neural network to
+          represent arbitrary data in multidimensional space. Two vectors nearby
+          in space, as computed via a distance metric such as dot product, means
+          the data they represent are also similar.
         </p>
-
-        <h2>The retrieval system I work on is called Manas.</h2>
-
-        <p>
-          My team manages over 50 clusters across the company, ranging from
-          thousands to billions of documents per node. We use kubernetes for
-          cluster management.
-        </p>
-        <p>
-          Manas is a distributed system and uses root-leaf fanout architecture.
-          It includes vertical and horizontal scaling and is responsive to
-          changes in traffic quantity and data size.
-        </p>
-
-        <h2>Manas performs two types of search: token and embedding</h2>
-        <p>
-          Token retrieval is the classic search-by-keyword use case. Given a
-          forward index (document->term), we build inverted indexes
-          (term->document) called posting lists. This allows us to perform
-          efficient term matching using nested tree-based queries on
-          billion-scale distributed corpuses.
-        </p>
-        <p>
-          Embedding retrieval (sometimes referred to as approximate nearest
-          neighbor, similarity search, or vector database) is where the exciting
-          stuff happens. Training models to represent arbitrary data as
-          embeddings and mapping them in n-dimensional space allows us to search
-          for data based on semantic similarity using simple functions like
-          inner product. It's what powers features like related pins or visual
-          search.
-        </p>
-
         <div class="d-flex flex-column align-items-center">
           <img
-            src="/img/pinterest/pinterest-1.jpg"
+            src="/img/pinterest/pinterest-space.png"
             alt="Image of "
-            width="100%"
+            width="80%"
             class="pad"
           />
         </div>
-        <p class="caption">3-dimensional embedding space</p>
 
-        <h2>Within Manas, I specialize in embedding retrieval.</h2>
         <p>
-          Manas supports two ANN algorithms: HNSW (hierarchical navigable small
-          world) graph, and IVF (inverted file index).
+          K-Nearest-Neighbors (KNN) search finds the closest K embeddings to a
+          given query embedding. However, computing the distance for all
+          embeddings in the data set is infeasible for Pinterest's billion-scale
+          datasets.
+          <br /><br />
+          Approximate-Nearest-Neighbors (ANN) is an approximate embedding search
+          solution that trades off accuracy for efficiency. Hierarchical
+          Navigable Small World Graphs (HNSW) are a multi-layer graphs that can
+          quickly refine the entire embedding space to a specific target area.
+          The base layer0 contains all nodes, while each layern+1 contains a
+          subset of nodes in layern. The algorithm traverses the graph at every
+          layer, using the local minimum of layern+1 as the entry point to
+          layern. Many parameters, such as graph connectivity and heap size, can
+          be tuned to optimize the accuracy-efficiency trade-off. I help users
+          build and deploy new HNSW graph indexes for custom data types, provide
+          debugging support, develop new semantic search features (eg. Recall
+          Monitoring, Quantization, 8-Bit Embeddings), and optimize retrieval
+          efficiency.
         </p>
 
         <div class="d-flex flex-column align-items-center">
           <img
-            src="/img/pinterest/pinterst-3.png"
+            src="/img/pinterest/pinterest-hnsw.png"
             alt="Image of "
             width="120%"
             class="pad"
           />
         </div>
-        <p class="caption">
-          hierarchical navigable small world graph data structure
-        </p>
 
+        <h3>Distributed Retrieval Architecture</h3>
         <p>
-          Some ANN projects I've worked on include online recall monitoring,
-          support for 8-bit embeddings, and most recently, embedding
-          quantization.
-        </p>
-        <p>
-          Quantization is a type of vector compression that reduces the data
-          size and memory usage
+          Pinterest's retrieval system is hosted on a hierarchical distributed
+          architecture. A root node fans out to many leaf shards, each of which
+          contains multiple data segments. Replicas are added according to
+          traffic fluctuations, thus creating a multi-level horizontal and
+          vertical scalable system for large (TB) indexes and high (100k) QPS.
+          <br /><br />
+          I have performed optimizations across 20+ clusters to tune instance
+          resources with the quantity of shards and segments. In 2023 I designed
+          and implemented adaptive search parameters which automatically
+          determine the number of documents to aggregate at the segment, leaf,
+          and root levels. This affects the data overfetch at each level of the
+          hierarchy, balancing efficiency and result quality.
+          <br /><br />
+          I've also developed data visualization tooling that includes an
+          interactive representation of document distribution and a latency
+          trace flame graph.
+          <br /><br />
+          Altogether, I have saved about $1M in annual cloud computing costs by
+          improving retrieval efficiency with right-sizing, re-sharding, and
+          funnel tuning.
         </p>
 
         <div class="d-flex flex-column align-items-center">
           <img
-            src="/img/pinterest/pinterest-2.png"
+            src="/img/pinterest/pinterest-architecture.png"
             alt="Image of "
             width="120%"
             class="pad"
           />
         </div>
-        <p class="caption">product quantization</p>
 
-        <h2>I'm also familiar with ML serving.</h2>
+        <h3>Recall Monitoring</h3>
         <p>
-          I led a migration from a local embedded scoring system to a remote GPU
-          server. This allowed us to decouple data sharding (fanout to more
-          nodes) from ML computation (run larger batches on fewer nodes). It
-          also saved a few million dollars a year.
+          In 2024 I designed and implemented an online recall metric that gives
+          users live insight into recall across various attributes. Recall (the
+          percent of ANN results that exist in the exact-KNN result set) is
+          important to quantify the accuracy loss of ANN. I created a realtime
+          recall metric logging pipeline that monitors instantaneous and gradual
+          recall degradation or improvement across many distinct attributes. One
+          project complexity was ensuring that in a non-isolated production
+          environment, resource allocation for the computationally-intense KNN
+          retrieval did not interfere with the main system's ANN functionality.
+          To accommodate this, I implemented a series of safety mechanisms
+          including parallel processing (threadpooling), asychronization
+          (callback chains), rate limiting, request sampling and linear
+          interpolation. After the launch, users are able to rapidly iterate on
+          model and embedding versions with live results, while developers have
+          insight into the quality impact of new features.
         </p>
 
-        <h2>And tooling.</h2>
-
-        <h2>
-          I'm proud of a few other achievements during my time at Pinterest too.
-        </h2>
-
+        <h3>Quantization</h3>
         <p>
-          - top c++ code contributor - hackathon winner - 2-time c++ bug
-          fixathon winner - mentoring new hires - working on pinplanet, the
-          employee-led sustainability group
+          In 2024 I worked on designing, implementing, and launching embedding
+          quantization. A quantizer reduces the dimensions or precision of a
+          vector, compressing it to a smaller size to significantly reduce
+          embedding memory. Product quantization enables aggressive vector
+          compression at the expense of precision loss. In offline training, the
+          N-dimensional vector space is divided into D subspaces, each of which
+          uses k-means to find M centroids. Next, each vector is encoded to a
+          series of centroid IDs. Finally, during online retrieval, each code is
+          reconstructed, or decoded, by mapping the centroid ID to the centroid
+          vector.
+          <br /><br />
+          The diagram illustrates a simplified example of product quantization
+          that achieves an 8x embedding size reduction.
+          <br /><br />
+
+          My contributions included: creating a quantization configuration API,
+          designing a quantized embedding indexer and writer, integrating FAISS
+          open-sourced quantization, training and encoding the quantizer,
+          flushing the quantized embeddings to SSD, and performing integration
+          testing. I benchmarked various configurations to assess impact on
+          recall, latency, CPU, and memory before designing and executing an
+          online A/B experiment. The quantization feature enabled large memory
+          optimizations while maintaining neutral engagement and recall.
         </p>
+        <div class="d-flex flex-column align-items-center">
+          <img
+            src="/img/pinterest/pinterest-quantization.png"
+            alt="Image of "
+            width="120%"
+            class="pad"
+          />
+        </div>
+
+        <h3>SIMD 8-bit Inner Product</h3>
+        <p>
+          As a precursor to quantization, I implemented support for 8-bit
+          embeddings. Because the system computes ~100k distance computations
+          per request and receives ~100k queries per second, the distance
+          calculation must be highly optimized. I implemented 8-bit inner
+          product using SIMD (single instruction multiple data), an efficient
+          hardware-based parallel computing architecture. I wrote functions for
+          for Intel processors with AVX intrinsics and for ARM processors with
+          Neon intrinsics. The code processes 8 dimensions at a time, loads the
+          values from memory to registers, converts to float to handle overflow,
+          multiplies and accumulates the product, processes remainders, and
+          finally normalizes output to [-1,1]. After implementing feature
+          support, I conducted an A/B experiment that converted attributes from
+          16 to 8 bits. It yielded neutral product metrics and recall, with 50%
+          memory reduction and 40% CPU optimization of the distance computation.
+        </p>
+
+        <h3>Remote Model Inference</h3>
+        <p>
+          Machine learning inference applies a model to input data to generate
+          an output prediction. At Pinterest, we use this technique during
+          retrieval to predict the relevance and engagement scores of Pins and
+          rank results by quality. After fetching and preparing data from the
+          index, a model server runs machine learning models to compute a score
+          for each data object. Historically, the model server that performs
+          inference was embedded in the retrieval infrastructure system I work
+          on, meaning that it shared resources with retrieval logic. In 2023 led
+          a migration to move this predict computation to a remote server,
+          instead of embedded within the same servers as retrieval. For this
+          project I led the technical design and implementation, which included
+          API and RPC design, code execution, cross-team project management,
+          robust error handling, integration testing, A/B experimentation,
+          rollout, and knowledge sharing. The following diagram illustrates the
+          system architecture before and after the migration:
+        </p>
+        <p>
+          This system includes two different types of servers: CPU and GPU. GPU
+          processors are designed to quickly compute calculations in parallel,
+          which makes them well-suited for machine learning inference. When
+          retrieval and model inference were unified, we had to run the entire
+          CPU-intensive system on GPU machines. My system design decoupled
+          retrieval and inference into separate systems so that GPUs are
+          reserved specifically for ML inference. This increased GPU utilization
+          from 11% to 80%.
+          <br /><br />
+          Another efficiency improvement came from the sharding strategy.
+          Retrieval is most efficient when distributed across many leaf nodes
+          with small data shards. But model serving is most efficient on fewer
+          nodes, because GPUs are optimized for high parallelization. By running
+          model server on a single host, I achieved fewer queues per model that
+          fill more quickly, so requests can be accumulated into larger parallel
+          batches. This optimization increased average batch size from 5 to 160.
+          <br /><br />
+          After launching the migration, the system’s serving cost decreased by
+          38%, which amounts to $1.5M of annual infra cost savings.
+          Simultaneously, the retrieval index size grew by 37% while QPS
+          increased by 20%. Tail latency was also reduced by 30%.
+        </p>
+        <div class="d-flex flex-column align-items-center">
+          <img
+            src="/img/pinterest/pinterest-ml.png"
+            alt="Image of "
+            width="200%"
+            class="pad"
+          />
+        </div>
       </div>
     </div>
   </body>
